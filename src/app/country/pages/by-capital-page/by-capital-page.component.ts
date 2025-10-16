@@ -24,14 +24,18 @@ export class ByCapitalPageComponent {
     this.isError.set(null);
 
     this.countryServise.searchByCapital( query )
-      .subscribe( (countries) => {
-        this.isLoading.set(false);
-        this.countries.set( countries );
-
-        // Aquí no es lo ideal se puede pero es mejor en el servicio
-        // const mappedCountries = CountryMapper.mapRestCountryArrayToCountryArray(countries);
-        // console.log(mappedCountries);
-        // this.query.set( query );
+      .subscribe({
+        next: (countries) => {
+          this.countries.set(countries);
+          this.isLoading.set(false);
+          this.query.set(query);
+        },
+        error: (err) => {
+          this.isLoading.set(false);
+          this.countries.set([]);
+          this.isError.set(err);
+          this.query.set('');
+        }
       });
   }
 }
