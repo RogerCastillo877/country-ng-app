@@ -19,7 +19,7 @@ export class ByCountryPageComponent {
     loader: ({ request }) => {
       if ( !request.query ) return of([]);
 
-      return this.countryServise.searchByCounry( request.query )
+      return this.countryServise.searchByCountry( request.query )
     },
   })
 }
