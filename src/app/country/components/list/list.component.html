@@ -29,7 +29,30 @@
           <a [routerLink]="['/country/by', country.cca2]" class="link-primary cursor-pointer">Más información</a>
         </td>
       </tr>
+      }
 
+      @if (erroMessage()) {
+      <tr>
+        <td colspan="8" class="text-center">
+          <h3>{{ erroMessage() }}</h3>
+        </td>
+      </tr>
+      }
+
+      @if (countries().length === 0 && !isLoading()) {
+      <tr>
+        <td colspan="8" class="text-center">
+          <h3>No hay países que mostrar</h3>
+        </td>
+      </tr>
+      }
+
+      @if (isLoading()) {
+      <tr>
+        <td colspan="8" class="text-center">
+          <span class="loading loading-spinner loading-lg"></span>
+        </td>
+      </tr>
       }
     </tbody>
   </table>
